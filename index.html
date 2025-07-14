@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor + Amor - Cardápio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #4a7c59;
+            --accent-coral: #ff6b6b;
+            --light-beige: #faf5f0;
+            --text-dark: #2d2d2d;
+            --text-light: #666;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --spring: #ff9a9e;
+            --summer: #feca57;
+            --autumn: #ff6b6b;
+            --winter: #5f9ea0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-beige);
+            overflow-x: hidden;
+        }
+
+        /* Header com Logo Melhorada */
+        .header {
+            background: linear-gradient(135deg, #fff 0%, #faf5f0 100%);
+            padding: 2rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .logo-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
+            background: white;
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            margin-bottom: 1rem;
+        }
+
+        .floral-pattern {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at center, #ff6b6b 0%, transparent 20%),
+                        conic-gradient(from 0deg, #ff6b6b, #ffa500, #4a7c59, #4ecdc4, #ff6b6b);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floral-pattern::before {
+            content: '🌺';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .logo-text {
+            margin-top: 1rem;
+        }
+
+        .logo-text h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--primary-green);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            fill: #25d366;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Seções */
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-coral), var(--primary-green));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Categorias de Estações */
+        .season-category {
+            margin-bottom: 3rem;
+        }
+
+        .season-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .season-icon {
+            font-size: 2rem;
+        }
+
+        .season-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .season-spring { color: var(--spring); }
+        .season-summer { color: var(--summer); }
+        .season-autumn { color: var(--autumn); }
+        .season-winter { color: var(--winter); }
+        .season-classic { color: var(--primary-green); }
+
+        /* Grid de Cards */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards de Saladas */
+        .salad-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .salad-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .salad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .salad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .salad-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-coral);
+        }
+
+        .salad-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .sauce-type {
+            display: inline-block;
+            background: var(--light-beige);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Badge de estação */
+        .season-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Seção Novidades */
+        .novidades {
+            background: linear-gradient(135deg, #fff 0%, #f0faf5 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-top: 4rem;
+        }
+
+        .novidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .novidade-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .novidade-card:hover {
+            transform: scale(1.05);
+        }
+
+        .novidade-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .decorative-flowers {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .season-title {
+                font-size: 1.4rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .salad-card {
+                padding: 1.5rem;
+            }
+
+            .novidades {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .salad-card, .novidade-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header com Logo -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <div class="floral-pattern"></div>
+                </div>
+                <div class="logo-text">
+                    <h1>Sabor + Amor</h1>
+                    <p class="subtitle">by Ada</p>
+                </div>
+                <div class="contact-info">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    <span>45 9 9904-6756</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cardápio de Saladas -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Cardápio de Saladas</h2>
+            
+            <!-- Saladas Clássicas (Menor Preço) -->
+            <div class="season-category">
+                <div class="season-header">
+                    <span class="season-icon">🥗</span>
+                    <h3 class="season-title season-classic">Clássicas</h3>
+                </div>
+                <div class="menu-grid">
+                    <!-- Salada Verde - R$13 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Verde</h3>
+                            <span class="price">R$ 13</span>
+                        </div>
+                        <span class="sauce-type">Molho de iogurte</span>
+                        <p class="salad-description">Frango, Azeitona, Rúcula, Tomate, Alface</p>
+                    </div>
+
+                    <!-- Salada Tabbouleh - R$14 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Tabbouleh</h3>
+                            <span class="price">R$ 14</span>
+                        </div>
+                        <span class="sauce-type">Molho vinagrete</span>
+                        <p class="salad-description">Quinoa, Menta, Tomate, Cebola roxa, Salsinha</p>
+                    </div>
+
+                    <!-- Salada de Macarrão - R$15 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada de Macarrão</h3>
+                            <span class="price">R$ 15</span>
+                        </div>
+                        <span class="sauce-type">Molho de iogurte</span>
+                        <p class="salad-description">Azeitona, Brócolis, Frango, Macarrão, Maçã ou Tomate</p>
+                    </div>
+
+                    <!-- Salada Grão de Bico - R$15 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Grão de Bico</h3>
+                            <span class="price">R$ 15</span>
+                        </div>
+                        <span class="sauce-type">Molho de iogurte ou Mostarda com mel</span>
+                        <p class="salad-description">Atum ou Frango, Cenoura, Azeitona, Milho, Grão de bico, Alface</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saladas Primavera -->
+            <div class="season-category">
+                <div class="season-header">
+                    <span class="season-icon">🌸</span>
+                    <h3 class="season-title season-spring">Primavera</h3>
+                </div>
+                <div class="menu-grid">
+                    <!-- Salada Primavera - R$17 -->
+                    <div class="salad-card">
+                        <span class="season-badge">🌸</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Primavera</h3>
+                            <span class="price">R$ 17</span>
+                        </div>
+                        <span class="sauce-type">Molho vinagrete</span>
+                        <p class="salad-description">Frango, Abobrinha, Cenoura, Brócolis, Tomate, Mix de quinoa</p>
+                    </div>
+
+                    <!-- Salada de Rúcula e Maçã - R$16 -->
+                    <div class="salad-card">
+                        <span class="season-badge">🌸</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada de Rúcula e Maçã</h3>
+                            <span class="price">R$ 16</span>
+                        </div>
+                        <span class="sauce-type">Molho vinagrete</span>
+                        <p class="salad-description">Nozes caramelizada, Rúcula, Maçã, Cebola roxa, Queijo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saladas Verão -->
+            <div class="season-category">
+                <div class="season-header">
+                    <span class="season-icon">☀️</span>
+                    <h3 class="season-title season-summer">Verão</h3>
+                </div>
+                <div class="menu-grid">
+                    <!-- Salada Verão - R$16 -->
+                    <div class="salad-card">
+                        <span class="season-badge">☀️</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Verão</h3>
+                            <span class="price">R$ 16</span>
+                        </div>
+                        <span class="sauce-type">Molho cítrico</span>
+                        <p class="salad-description">Frango, Tomate, Manga, Alface, Cebola roxa, Pepino</p>
+                    </div>
+
+                    <!-- Salada Manga Verde - R$16 -->
+                    <div class="salad-card">
+                        <span class="season-badge">☀️</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Manga Verde</h3>
+                            <span class="price">R$ 16</span>
+                        </div>
+                        <span class="sauce-type">Molho shoyu</span>
+                        <p class="salad-description">Manga, Cenoura, Pepino, Amêndoas</p>
+                    </div>
+
+                    <!-- Salada Sushi - R$17 -->
+                    <div class="salad-card">
+                        <span class="season-badge">☀️</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Sushi</h3>
+                            <span class="price">R$ 17</span>
+                        </div>
+                        <span class="sauce-type">Molho shoyu</span>
+                        <p class="salad-description">Arroz Basmati, Abacate, Pepino, Atum, Cebolinha, Gergelim</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saladas Outono -->
+            <div class="season-category">
+                <div class="season-header">
+                    <span class="season-icon">🍂</span>
+                    <h3 class="season-title season-autumn">Outono</h3>
+                </div>
+                <div class="menu-grid">
+                    <!-- Salada Outono - R$17 -->
+                    <div class="salad-card">
+                        <span class="season-badge">🍂</span>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Outono</h3>
+                            <span class="price">R$ 17</span>
+                        </div>
+                        <span class="sauce-type">Molho de manjericão</span>
+                        <p class="salad-description">Frango, Cebolinha, Salsinha, Cebola roxa, Feijão, Abacate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saladas Especiais -->
+            <div class="season-category">
+                <div class="season-header">
+                    <span class="season-icon">⭐</span>
+                    <h3 class="season-title season-classic">Especiais</h3>
+                </div>
+                <div class="menu-grid">
+                    <!-- Salada Tailandesa - R$17 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Tailandesa</h3>
+                            <span class="price">R$ 17</span>
+                        </div>
+                        <span class="sauce-type">Molho de especiarias</span>
+                        <p class="salad-description">Frango, Cenoura, Vagem, Pimentão, Repolho roxo, Amêndoas</p>
+                    </div>
+
+                    <!-- Salada Proteica - R$17 -->
+                    <div class="salad-card">
+                        <div class="salad-header">
+                            <h3 class="salad-name">Salada Proteica</h3>
+                            <span class="price">R$ 17</span>
+                        </div>
+                        <span class="sauce-type">Molho vinagrete</span>
+                        <p class="salad-description">Frango ou Atum, Grão de bico, Quinoa, Tomate, Salsinha, Cebola roxa, Pimenta dedo de moça, Rúcula</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção Novidades -->
+            <div class="novidades">
+                <h2 class="section-title">Novidades</h2>
+                
+                <div class="novidades-grid">
+                    <!-- Overnight -->
+                    <div class="novidade-card">
+                        <div class="novidade-icon">🥣</div>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Overnight</h3>
+                            <span class="price">R$ 10</span>
+                        </div>
+                        <p class="salad-description">Aveia, Chia, Leite, Iogurte grego, Geleias ou Frutas (da sua preferência)</p>
+                    </div>
+
+                    <!-- Pudim de Manga -->
+                    <div class="novidade-card">
+                        <div class="novidade-icon">🥭</div>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Pudim de Manga</h3>
+                            <span class="price">R$ 10</span>
+                        </div>
+                        <p class="salad-description">Manga, Chia, Mel</p>
+                    </div>
+
+                    <!-- Danone de Morango -->
+                    <div class="novidade-card">
+                        <div class="novidade-icon">🍓</div>
+                        <div class="salad-header">
+                            <h3 class="salad-name">Danone de Morango</h3>
+                            <span class="price">R$ 10</span>
+                        </div>
+                        <p class="salad-description">Iogurte grego, Leite em pó, Morango</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Sabor + Amor by Ada</p>
+            <p>Feito com amor e ingredientes selecionados</p>
+            <div class="decorative-flowers">
+                <span>🌺</span>
+                <span>🌸</span>
+                <span>🌼</span>
+                <span>🌻</span>
+                <span>🌷</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
