@@ -57,13 +57,32 @@
     text-align: center;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-wrapper {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50% !important;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto !important;
+    aspect-ratio: 1 / 1 !important;
+    display: block !important;
+    background-color: #faf5f0;
 }
 
 .logo-wrapper img {
-    width: 350px;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative;
+    z-index: 1;
 }
 
 .logo-text {
@@ -400,6 +419,68 @@
             line-height: 1.6;
         }
 
+        /* Ingredient Badges */
+        .ingredients-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .ingredient {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+            white-space: nowrap;
+        }
+
+        .ingredient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Ingredient Types */
+        .ingredient.protein {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .ingredient.green {
+            background: linear-gradient(135deg, #51cf66, #40c057);
+            color: white;
+        }
+
+        .ingredient.red {
+            background: linear-gradient(135deg, #ff8787, #ff6b6b);
+            color: white;
+        }
+
+        .ingredient.orange {
+            background: linear-gradient(135deg, #ffb347, #ff9500);
+            color: white;
+        }
+
+        .ingredient.grain {
+            background: linear-gradient(135deg, #feca57, #ff9f43);
+            color: white;
+        }
+
+        .ingredient.nut {
+            background: linear-gradient(135deg, #d4a574, #b8956a);
+            color: white;
+        }
+
+        .ingredient.other {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+        }
+
         .sauce-type {
             display: inline-block;
             background: var(--light-beige);
@@ -409,6 +490,35 @@
             font-weight: 500;
             color: var(--primary-green);
             margin-bottom: 0.5rem;
+        }
+
+        /* Molho Section */
+        .molho-section {
+            margin: 1rem 0;
+        }
+
+        .molho {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 2px solid #5a67d8;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .molho::before {
+            content: "🥗 ";
+            font-size: 16px;
+        }
+
+        .molho:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         /* Badge de estação */
@@ -507,6 +617,41 @@
             .novidades {
                 padding: 2rem 1rem;
             }
+
+            .ingredients-container {
+                gap: 0.3rem;
+            }
+
+            .ingredient {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .molho {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ingredient {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+                gap: 0.2rem;
+            }
+
+            .ingredients-container {
+                gap: 0.25rem;
+            }
+
+            .molho {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            .molho::before {
+                font-size: 14px;
+            }
         }
 
         /* Animações */
@@ -562,8 +707,16 @@
                             <h3 class="salad-name">Salada Verde</h3>
                             <span class="price">R$ 13</span>
                         </div>
-                        <span class="sauce-type">Molho de iogurte</span>
-                        <p class="salad-description">Frango, Azeitona, Rúcula, Tomate, Alface</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho de iogurte</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient other">🫒 Azeitona</span>
+                            <span class="ingredient green">🥬 Rúcula</span>
+                            <span class="ingredient red">🍅 Tomate</span>
+                            <span class="ingredient green">🥬 Alface</span>
+                        </div>
                     </div>
 
                     <!-- Salada Tabbouleh - R$14 -->
@@ -572,8 +725,16 @@
                             <h3 class="salad-name">Salada Tabbouleh</h3>
                             <span class="price">R$ 14</span>
                         </div>
-                        <span class="sauce-type">Molho vinagrete</span>
-                        <p class="salad-description">Quinoa, Menta, Tomate, Cebola roxa, Salsinha</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho vinagrete</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient grain">🌾 Quinoa</span>
+                            <span class="ingredient green">🌿 Menta</span>
+                            <span class="ingredient red">🍅 Tomate</span>
+                            <span class="ingredient other">🧅 Cebola roxa</span>
+                            <span class="ingredient green">🌿 Salsinha</span>
+                        </div>
                     </div>
 
                     <!-- Salada de Macarrão - R$15 -->
@@ -582,8 +743,16 @@
                             <h3 class="salad-name">Salada de Macarrão</h3>
                             <span class="price">R$ 15</span>
                         </div>
-                        <span class="sauce-type">Molho de iogurte</span>
-                        <p class="salad-description">Azeitona, Brócolis, Frango, Macarrão, Maçã ou Tomate</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho de iogurte</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient other">🫒 Azeitona</span>
+                            <span class="ingredient green">🥦 Brócolis</span>
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient grain">🍝 Macarrão</span>
+                            <span class="ingredient red">🍎 Maçã/Tomate</span>
+                        </div>
                     </div>
 
                     <!-- Salada Grão de Bico - R$15 -->
@@ -592,8 +761,17 @@
                             <h3 class="salad-name">Salada Grão de Bico</h3>
                             <span class="price">R$ 15</span>
                         </div>
-                        <span class="sauce-type">Molho de iogurte ou Mostarda com mel</span>
-                        <p class="salad-description">Atum ou Frango, Cenoura, Azeitona, Milho, Grão de bico, Alface</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho de iogurte ou Mostarda com mel</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🐟 Atum/Frango</span>
+                            <span class="ingredient orange">🥕 Cenoura</span>
+                            <span class="ingredient other">🫒 Azeitona</span>
+                            <span class="ingredient grain">🌽 Milho</span>
+                            <span class="ingredient grain">🫘 Grão de bico</span>
+                            <span class="ingredient green">🥬 Alface</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -612,8 +790,17 @@
                             <h3 class="salad-name">Salada Primavera</h3>
                             <span class="price">R$ 17</span>
                         </div>
-                        <span class="sauce-type">Molho vinagrete</span>
-                        <p class="salad-description">Frango, Abobrinha, Cenoura, Brócolis, Tomate, Mix de quinoa</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho vinagrete</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient green">🥒 Abobrinha</span>
+                            <span class="ingredient orange">🥕 Cenoura</span>
+                            <span class="ingredient green">🥦 Brócolis</span>
+                            <span class="ingredient red">🍅 Tomate</span>
+                            <span class="ingredient grain">🌾 Mix de quinoa</span>
+                        </div>
                     </div>
 
                     <!-- Salada de Rúcula e Maçã - R$16 -->
@@ -623,8 +810,16 @@
                             <h3 class="salad-name">Salada de Rúcula e Maçã</h3>
                             <span class="price">R$ 16</span>
                         </div>
-                        <span class="sauce-type">Molho vinagrete</span>
-                        <p class="salad-description">Nozes caramelizada, Rúcula, Maçã, Cebola roxa, Queijo</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho vinagrete</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient nut">🥜 Nozes caramelizada</span>
+                            <span class="ingredient green">🥬 Rúcula</span>
+                            <span class="ingredient red">🍎 Maçã</span>
+                            <span class="ingredient other">🧅 Cebola roxa</span>
+                            <span class="ingredient other">🧀 Queijo</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -643,8 +838,17 @@
                             <h3 class="salad-name">Salada Verão</h3>
                             <span class="price">R$ 16</span>
                         </div>
-                        <span class="sauce-type">Molho cítrico</span>
-                        <p class="salad-description">Frango, Tomate, Manga, Alface, Cebola roxa, Pepino</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho cítrico</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient red">🍅 Tomate</span>
+                            <span class="ingredient orange">🥭 Manga</span>
+                            <span class="ingredient green">🥬 Alface</span>
+                            <span class="ingredient other">🧅 Cebola roxa</span>
+                            <span class="ingredient other">🫒 Pepino</span>
+                        </div>
                     </div>
 
                     <!-- Salada Manga Verde - R$16 -->
@@ -654,8 +858,15 @@
                             <h3 class="salad-name">Salada Manga Verde</h3>
                             <span class="price">R$ 16</span>
                         </div>
-                        <span class="sauce-type">Molho shoyu</span>
-                        <p class="salad-description">Manga, Cenoura, Pepino, Amêndoas</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho shoyu</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient orange">🥭 Manga</span>
+                            <span class="ingredient orange">🥕 Cenoura</span>
+                            <span class="ingredient other">🫒 Pepino</span>
+                            <span class="ingredient nut">🥜 Amêndoas</span>
+                        </div>
                     </div>
 
                     <!-- Salada Sushi - R$17 -->
@@ -665,8 +876,17 @@
                             <h3 class="salad-name">Salada Sushi</h3>
                             <span class="price">R$ 17</span>
                         </div>
-                        <span class="sauce-type">Molho shoyu</span>
-                        <p class="salad-description">Arroz Basmati, Abacate, Pepino, Atum, Cebolinha, Gergelim</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho shoyu</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient grain">🍚 Arroz Basmati</span>
+                            <span class="ingredient green">🥑 Abacate</span>
+                            <span class="ingredient other">🫒 Pepino</span>
+                            <span class="ingredient protein">🐟 Atum</span>
+                            <span class="ingredient green">🌿 Cebolinha</span>
+                            <span class="ingredient nut">🌱 Gergelim</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -685,8 +905,17 @@
                             <h3 class="salad-name">Salada Outono</h3>
                             <span class="price">R$ 17</span>
                         </div>
-                        <span class="sauce-type">Molho de manjericão</span>
-                        <p class="salad-description">Frango, Cebolinha, Salsinha, Cebola roxa, Feijão, Abacate</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho de manjericão</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient green">🌿 Cebolinha</span>
+                            <span class="ingredient green">🌿 Salsinha</span>
+                            <span class="ingredient other">🧅 Cebola roxa</span>
+                            <span class="ingredient grain">🫘 Feijão</span>
+                            <span class="ingredient green">🥑 Abacate</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -704,8 +933,17 @@
                             <h3 class="salad-name">Salada Tailandesa</h3>
                             <span class="price">R$ 17</span>
                         </div>
-                        <span class="sauce-type">Molho de especiarias</span>
-                        <p class="salad-description">Frango, Cenoura, Vagem, Pimentão, Repolho roxo, Amêndoas</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho de especiarias</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🍗 Frango</span>
+                            <span class="ingredient orange">🥕 Cenoura</span>
+                            <span class="ingredient green">🦣 Vagem</span>
+                            <span class="ingredient red">🫒 Pimentão</span>
+                            <span class="ingredient other">🥬 Repolho roxo</span>
+                            <span class="ingredient nut">🥜 Amêndoas</span>
+                        </div>
                     </div>
 
                     <!-- Salada Proteica - R$17 -->
@@ -714,8 +952,19 @@
                             <h3 class="salad-name">Salada Proteica</h3>
                             <span class="price">R$ 17</span>
                         </div>
-                        <span class="sauce-type">Molho vinagrete</span>
-                        <p class="salad-description">Frango ou Atum, Grão de bico, Quinoa, Tomate, Salsinha, Cebola roxa, Pimenta dedo de moça, Rúcula</p>
+                        <div class="molho-section">
+                            <span class="molho">Molho vinagrete</span>
+                        </div>
+                        <div class="ingredients-container">
+                            <span class="ingredient protein">🐟 Frango/Atum</span>
+                            <span class="ingredient grain">🫘 Grão de bico</span>
+                            <span class="ingredient grain">🌾 Quinoa</span>
+                            <span class="ingredient red">🍅 Tomate</span>
+                            <span class="ingredient green">🌿 Salsinha</span>
+                            <span class="ingredient other">🧅 Cebola roxa</span>
+                            <span class="ingredient red">🌶️ Pimenta</span>
+                            <span class="ingredient green">🥬 Rúcula</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -732,7 +981,13 @@
                             <h3 class="salad-name">Overnight</h3>
                             <span class="price">R$ 10</span>
                         </div>
-                        <p class="salad-description">Aveia, Chia, Leite, Iogurte grego, Geleias ou Frutas (da sua preferência)</p>
+                        <div class="ingredients-container">
+                            <span class="ingredient grain">🌾 Aveia</span>
+                            <span class="ingredient grain">🌱 Chia</span>
+                            <span class="ingredient other">🥛 Leite</span>
+                            <span class="ingredient other">🍮 Iogurte grego</span>
+                            <span class="ingredient red">🍓 Geleias/Frutas</span>
+                        </div>
                     </div>
 
                     <!-- Pudim de Manga -->
@@ -742,7 +997,11 @@
                             <h3 class="salad-name">Pudim de Manga</h3>
                             <span class="price">R$ 10</span>
                         </div>
-                        <p class="salad-description">Manga, Chia, Mel</p>
+                        <div class="ingredients-container">
+                            <span class="ingredient orange">🥭 Manga</span>
+                            <span class="ingredient grain">🌱 Chia</span>
+                            <span class="ingredient other">🍯 Mel</span>
+                        </div>
                     </div>
 
                     <!-- Danone de Morango -->
@@ -752,7 +1011,11 @@
                             <h3 class="salad-name">Danone de Morango</h3>
                             <span class="price">R$ 10</span>
                         </div>
-                        <p class="salad-description">Iogurte grego, Leite em pó, Morango</p>
+                        <div class="ingredients-container">
+                            <span class="ingredient other">🍮 Iogurte grego</span>
+                            <span class="ingredient other">🥛 Leite em pó</span>
+                            <span class="ingredient red">🍓 Morango</span>
+                        </div>
                     </div>
                 </div>
             </div>
