@@ -3,7 +3,8 @@
 Cardápio digital de saladas frescas e saudáveis.
 
 ## 🌐 Acesse o site
-[https://seu-usuario.github.io/sabor-amor/](https://seu-usuario.github.io/sabor-amor/)
+[sabormaisamor.com.br](https://sabormaisamor.com.br)
+
 
 ## 📱 Contato
 WhatsApp: 45 9 9904-6756
